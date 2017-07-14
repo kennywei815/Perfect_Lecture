@@ -1,0 +1,12 @@
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.exe.config
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.pdb
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.csprojResolveAssemblyReference.cache
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.pdb
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.exe.config
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.exe
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Debug\TTS_engine.pdb
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.csprojResolveAssemblyReference.cache
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.exe
+C:\Users\User\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Debug\TTS_engine.pdb
