@@ -15,12 +15,12 @@ You need to install these packages first:
 - A LaTeX distribution: [MikTeX](https://miktex.org/download) (easier to install on Windows, recommended) or [TeX Live](https://www.tug.org/texlive/) (cross-platform)
 - [Python3 interpreter](https://www.python.org/downloads/)
 
-You can find archived installers for these programs with installation manuals in the [Prerequisite](https://github.com/kennywei815/Perfect_Lecture/blob/master/Prerequisite) folder!
+You can find archived installers for these programs with installation manuals in the [Prerequisite folder](https://github.com/kennywei815/Perfect_Lecture/blob/master/Prerequisite)!
 
 # Quick Start
 
 ### Install
-You can get the installer [here](https://github.com/kennywei815/Perfect_Lecture/blob/master/Setup_Perfect_Lecture.exe)!
+Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/blob/master/Setup_Perfect_Lecture.exe) and install it on your machine!
 
 # License
 Copyright (c) 2017 Cheng-Kuan Wei and Prof. Jyhpyng Wang Licensed under the Apache License.
