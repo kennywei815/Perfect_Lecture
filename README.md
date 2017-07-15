@@ -2,6 +2,7 @@ Perfect Lecture
 ======
 Extend PowerPoint with technologies such as a LaTeX subsystem and a TTS system to allow much easier recording and revising of online course videos.
 
+- Support MS Office 2010 to Office 2016.
 - Integrated with [TeX4Office](https://github.com/kennywei815/TeX4Office) & [InsertImage++](https://github.com/kennywei815/InsertImagePlus)
 - Output both slide format _(.pptx)_ & video format _(.wmv & .mp4)_
 - Implemented a TTS subsystem with full support for [Speech Synthesis Markup Language(SSML)](https://www.w3.org/TR/speech-synthesis11/)
