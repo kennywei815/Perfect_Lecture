@@ -20,7 +20,7 @@ You can find archived installers for these programs with installation manuals in
 # Quick Start
 
 ### Install
-Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/blob/master/Setup_Perfect_Lecture.exe) and install it on your machine!
+Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/raw/master/Setup_Perfect_Lecture.exe) and install it on your machine!
 
 # License
 Copyright (c) 2017 Cheng-Kuan Wei and Prof. Jyhpyng Wang Licensed under the Apache License.
