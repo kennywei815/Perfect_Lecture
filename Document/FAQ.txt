@@ -1,0 +1,7 @@
+Q1: """...""" 的規則是？
+A1: ABC""" """ : """預設是token交界點=> ABC會單獨成為一個token。
+
+[Known Issues]
+1. If you click "Insert/Change Image" botton, and then close the dialogue without choosing "Open" or "Cancel", the program will randomly insert a image from work directory.
+2. If you use "Save as..." command to change the file name or encounter some occasionally internal error, later when you click "Compile with Perfect Lecture", "New/Edit LaTeX Display", or "Insert/Change Image", you may get the error message - "WScript.Shell encounters error: '-2147024894 (80070002)': Method 'Run' of object 'IWshShell3' failed".
+    [Solution] Please close Office and re-open the file. Then everything will be OK.

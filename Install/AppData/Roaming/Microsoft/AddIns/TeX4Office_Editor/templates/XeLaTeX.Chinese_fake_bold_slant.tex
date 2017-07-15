@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{xeCJK}        %%% Macros for Chinese/Japanese/Korean processing
+\usepackage{amsmath}
+
+\setCJKmainfont[AutoFakeBold=6,AutoFakeSlant=.4]{新細明體}
+    %AutoFakeBold設定粗體字要多粗
+    %AutoFakeSlant設定斜體字要多斜，範圍-0.999到0.999，負值為往左斜
+
+    %以下四行非必要，但對於切換字型蠻好用的。
+\defaultCJKfontfeatures{AutoFakeBold=6,AutoFakeSlant=.4} %以後不用再設定粗斜
+\newCJKfontfamily\Kai{標楷體}        %定義指令\Kai則切換成標楷體
+\newCJKfontfamily\Hei{微軟正黑體}    %定義指令\Hei則切換成正黑體
+\newCJKfontfamily\NewMing{新細明體}  %定義指令\NewMing則切換成新細明體
+    %註：若您的Windows有安裝別的字型，也可以自行設定。
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+\pagestyle{empty}
+
+\begin{document}
+
+\textbf{中文}
+
+\textbf{粗體boldface 12345中文字{\Kai 楷粗}}正常Normal 12345中文字
+
+\textit{斜體italic 12345中文字{\Hei 黑斜}}\:正常Normal 12345中文字
+
+$\sqrt{2}_{\text{中文}}$  %%% With the "amsmath" package, now you can include CJK charaters in subscription and superscriptiion (in the "\text" tag)
+
+\end{document}

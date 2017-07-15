@@ -1,0 +1,15 @@
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Release\TTS_engine.exe.config
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Release\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\bin\Release\TTS_engine.pdb
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Release\TTS_engine.csprojResolveAssemblyReference.cache
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Release\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Source\TTS_engine\TTS_engine\obj\Release\TTS_engine.pdb
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\TTS_engine\TTS_engine.exe.config
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\TTS_engine\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\TTS_engine\TTS_engine.pdb
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_LectureTTS_engine\TTS_engine.exe.config
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_LectureTTS_engine\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_LectureTTS_engine\TTS_engine.pdb
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_Lecture\TTS_engine\TTS_engine.exe.config
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_Lecture\TTS_engine\TTS_engine.exe
+Z:\kenny\Dropbox\works\perfect_lecturer\Installer\AddIns\Perfect_Lecture\TTS_engine\TTS_engine.pdb
