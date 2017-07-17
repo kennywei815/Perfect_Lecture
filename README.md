@@ -22,7 +22,15 @@ You can find archived installers for these programs with installation manuals in
 ### Install
 Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/raw/master/Setup_Perfect_Lecture.exe) and install it on your machine!
 
+### Usage
+
+Just 1 step: Open the slides and type Perfect Lecture Scripts(enclosed by `<script>`...`</script>`) in the note page below. Then click "Compile with Perfect Lecture" in the "Add-ins" tab!
+![alt text](https://github.com/kennywei815/TeX4Office/blob/master/www/step1_compile_with_perfect_lecture.png)
+
+The result slides and videos with machine-synthesized narrative will be put in the same directory.
+![alt text](https://github.com/kennywei815/TeX4Office/blob/master/www/step4_results.PNG)
+
 # License
-Copyright (c) 2017 Cheng-Kuan Wei and Prof. Jyhpyng Wang Licensed under the Apache License.
+Copyright (c) 2017 魏誠寬(Cheng-Kuan Wei) and 汪治平教授(Prof. Jyhpyng Wang) Licensed under the Apache License.
 
 This software contains code derived from Jonathan Le Roux and Zvika Ben-Haim's IguanaTeX project which is originally released under the Creative Commons Attribution 3.0 License and combined into TeX4Office as a whole under Apache License 2.0 .
