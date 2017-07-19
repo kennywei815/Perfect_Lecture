@@ -42,13 +42,12 @@ Attribute VB_Name = "Build"
 Private Const PLATFORM_DEF As String = "#Const PLATFORM = PowerPoint"
 
 
-Public WorkDir As String
-Public VBComponents
-Public Sep As String
+Private VBComponents
+Private Sep As String
     
-Public fileDir As String
-Public fileName As String
-Public fileFullName As String
+Private fileDir As String
+Private fileName As String
+Private fileFullName As String
     
 
 
@@ -56,14 +55,12 @@ Public fileFullName As String
 '                                            Common_Vars Function
 '                                        Set up commonly used variables
 '==============================================================================================================================================
-Sub Common_Vars()
+Private Sub Common_Vars()
     
     'Sep = Application.PathSeparator
     Sep = "\"
 
 #If PLATFORM = PowerPoint Then
-    WorkDir = ActivePresentation.path
-    
     fileDir = ActivePresentation.path & Sep
     fileName = ActivePresentation.name
     fileFullName = ActivePresentation.FullName
@@ -71,8 +68,6 @@ Sub Common_Vars()
     Set VBComponents = ActivePresentation.VBProject.VBComponents
             
 #ElseIf PLATFORM = Word Then
-    WorkDir = ActiveDocument.path
-    
     fileDir = ActiveDocument.path & Sep
     fileName = ActiveDocument.name
     fileFullName = ActiveDocument.FullName
@@ -80,8 +75,6 @@ Sub Common_Vars()
     Set VBComponents = ActiveDocument.VBProject.VBComponents
             
 #ElseIf PLATFORM = Excel Then
-    WorkDir = ActiveWorkbook.path
-    
     fileDir = ActiveWorkbook.path & Sep
     fileName = ActiveWorkbook.name
     fileFullName = ActiveWorkbook.FullName
@@ -90,7 +83,8 @@ Sub Common_Vars()
     
 #End If
     
-    ChDir WorkDir
+    ' Restore working directory
+    ChDir fileDir
 
 End Sub
 
@@ -108,13 +102,13 @@ Sub Build()
     fn = Left(fileName, Len(fileName) - 5)  'Check if suffix contains 4 characters
     fn_addin = "Perfect_Lecture"
     
-    f_path = WorkDir & Sep & fn
-    f_path_addin = WorkDir & Sep & fn_addin
+    f_path = fileDir & fn
+    f_path_addin = fileDir & fn_addin
     
     'TODO_NOW
-    addinDir = WorkDir & Sep & "..\Install\AppData\Roaming\Microsoft\AddIns" & Sep
-    wordStartDir = WorkDir & Sep & "..\Install\AppData\Roaming\Microsoft\Word\STARTUP" & Sep
-    excelStartDir = WorkDir & Sep & "..\Install\AppData\Roaming\Microsoft\Excel\XLSTART" & Sep
+    addinDir = fileDir & "..\Install\AppData\Roaming\Microsoft\AddIns" & Sep
+    wordStartDir = fileDir & "..\Install\AppData\Roaming\Microsoft\Word\STARTUP" & Sep
+    excelStartDir = fileDir & "..\Install\AppData\Roaming\Microsoft\Excel\XLSTART" & Sep
     
     
     'Copy Python files to addinDir\Perfect_Lecture
@@ -124,7 +118,7 @@ Sub Build()
     If fs.FileExists(pyFiles_out) Then
         fs.DeleteFile pyFiles_out
     End If
-    fs.copyFile WorkDir & Sep & "*.py", pyFilesDir
+    fs.copyFile fileDir & "*.py", pyFilesDir
     
 
 #If PLATFORM = PowerPoint Then
@@ -219,17 +213,17 @@ Sub Reload_Modules()
         .Remove .Item("Tests")
         
         
-        .Import WorkDir & Sep & "AutoRun.bas"
-        .Import WorkDir & Sep & "Common_Utilities.bas"
+        .Import fileDir & "AutoRun.bas"
+        .Import fileDir & "Common_Utilities.bas"
 
-        .Import WorkDir & Sep & "LaTeX2PNG.bas"
-        .Import WorkDir & Sep & "Image2PNG.bas"
+        .Import fileDir & "LaTeX2PNG.bas"
+        .Import fileDir & "Image2PNG.bas"
         
-        .Import WorkDir & Sep & "Main.bas"
-        .Import WorkDir & Sep & "Main_Helpers.bas"
+        .Import fileDir & "Main.bas"
+        .Import fileDir & "Main_Helpers.bas"
         
-        .Import WorkDir & Sep & "Perfect_Lecturer.bas"
-        .Import WorkDir & Sep & "Tests.bas"
+        .Import fileDir & "Perfect_Lecturer.bas"
+        .Import fileDir & "Tests.bas"
         
         
         .Item("AutoRun").CodeModule.ReplaceLine 48, PLATFORM_DEF
@@ -258,20 +252,20 @@ Sub Export_Modules()
 
     With VBComponents
 
-        .Item("AutoRun").Export WorkDir & Sep & "AutoRun.bas"
-        .Item("Common_Utilities").Export WorkDir & Sep & "Common_Utilities.bas"
+        .Item("AutoRun").Export fileDir & "AutoRun.bas"
+        .Item("Common_Utilities").Export fileDir & "Common_Utilities.bas"
 
-        .Item("LaTeX2PNG").Export WorkDir & Sep & "LaTeX2PNG.bas"
-        .Item("Image2PNG").Export WorkDir & Sep & "Image2PNG.bas"
+        .Item("LaTeX2PNG").Export fileDir & "LaTeX2PNG.bas"
+        .Item("Image2PNG").Export fileDir & "Image2PNG.bas"
         
-        .Item("Main").Export WorkDir & Sep & "Main.bas"
-        .Item("Main_Helpers").Export WorkDir & Sep & "Main_Helpers.bas"
+        .Item("Main").Export fileDir & "Main.bas"
+        .Item("Main_Helpers").Export fileDir & "Main_Helpers.bas"
         
-        .Item("Build").Export WorkDir & Sep & "Build.bas"
-        .Item("Reload_Build_Module").Export WorkDir & Sep & "Reload_Build_Module.bas"
+        .Item("Build").Export fileDir & "Build.bas"
+        .Item("Reload_Build_Module").Export fileDir & "Reload_Build_Module.bas"
         
-        .Item("Perfect_Lecturer").Export WorkDir & Sep & "Perfect_Lecturer.bas"
-        .Item("Tests").Export WorkDir & Sep & "Tests.bas"
+        .Item("Perfect_Lecturer").Export fileDir & "Perfect_Lecturer.bas"
+        .Item("Tests").Export fileDir & "Tests.bas"
         
     End With
     

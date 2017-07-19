@@ -42,35 +42,36 @@ Attribute VB_Name = "Reload_Build_Module"
 Private Const PLATFORM_DEF As String = "#Const PLATFORM = PowerPoint"
 
 
-Public WorkDir As String
-Public VBComponents
-Public Sep As String
+Private VBComponents
+Private Sep As String
+Private fileDir As String
 
 
 '==============================================================================================================================================
 '                                            Common_Vars Function
 '                                        Set up commonly used variables
 '==============================================================================================================================================
-Sub Common_Vars()
+Private Sub Common_Vars()
+    
+    'Sep = Application.PathSeparator
+    Sep = "\"
 
 #If PLATFORM = PowerPoint Then
-    WorkDir = ActivePresentation.path
+    fileDir = ActivePresentation.path & Sep
     Set VBComponents = ActivePresentation.VBProject.VBComponents
             
 #ElseIf PLATFORM = Word Then
-    WorkDir = ActiveDocument.path
+    fileDir = ActiveDocument.path & Sep
     Set VBComponents = ActiveDocument.VBProject.VBComponents
             
 #ElseIf PLATFORM = Excel Then
-    WorkDir = ActiveWorkbook.path
+    fileDir = ActiveWorkbook.path & Sep
     Set VBComponents = ActiveWorkbook.VBProject.VBComponents
     
 #End If
     
-    'Sep = Application.PathSeparator
-    Sep = "\"
-    
-    ChDir WorkDir
+    ' Restore working directory
+    ChDir fileDir
 
 End Sub
 
@@ -87,7 +88,7 @@ Sub Reload_Build_Module()
     With VBComponents
     
         .Remove .Item("Build")
-        .Import WorkDir & Sep & "Build.bas"
+        .Import fileDir & "Build.bas"
         
         
         .Item("Build").CodeModule.ReplaceLine 40, PLATFORM_DEF
