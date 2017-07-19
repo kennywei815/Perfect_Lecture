@@ -24,7 +24,7 @@ Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect
 
 You can find the user manuals in the start menu. <br />
 
-![start_menu.png](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/start_menu.png =360x)
+![start_menu.png](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/start_menu.png =360x725)
 
 ### Usage
 
