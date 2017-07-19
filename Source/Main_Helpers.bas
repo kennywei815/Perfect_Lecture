@@ -66,25 +66,6 @@ Public Const InvalidName As String = "!@#$#%^$&^%*&&^*(*&)"
 #End If
 
 
-' Get current slide or document
-Public AllShapes As Shapes
-
-#If PLATFORM = PowerPoint Then
-    Public SlideIndex As Long
-    Public sld As Slide
-    Public osld As Slide
-            
-#ElseIf PLATFORM = Word Then
-    Public sld As Document
-    Public osld As Document
-            
-#ElseIf PLATFORM = Excel Then
-    Public sld As Worksheet
-    Public osld As Worksheet
-            
-#End If
-
-
 '==============================================================================================================================================
 '                                            Plateform-dependent Helper Functions
 '==============================================================================================================================================

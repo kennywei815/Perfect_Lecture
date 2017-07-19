@@ -41,6 +41,76 @@ Attribute VB_Name = "Perfect_Lecturer"
 #Const PLATFORM = PowerPoint
 
 
+Private VBComponents
+Private Sep As String
+    
+Private fileDir As String
+Private fileName As String
+Private filePath As String
+    
+Private ProgramDir As String
+    
+
+
+'==============================================================================================================================================
+'                                  Common_Path_Vars & Common_Doc_Vars Functions
+'                                        Set up commonly used variables
+'==============================================================================================================================================
+Private Sub Common_Path_Vars()
+    
+    'Sep = Application.PathSeparator
+    Sep = "\"
+
+#If PLATFORM = PowerPoint Then
+    fileDir = ActivePresentation.path & Sep
+    fileName = ActivePresentation.name
+    filePath = ActivePresentation.FullName
+    
+    Set VBComponents = ActivePresentation.VBProject.VBComponents
+            
+#ElseIf PLATFORM = Word Then
+    fileDir = ActiveDocument.path & Sep
+    fileName = ActiveDocument.name
+    filePath = ActiveDocument.FullName
+    
+    Set VBComponents = ActiveDocument.VBProject.VBComponents
+            
+#ElseIf PLATFORM = Excel Then
+    fileDir = ActiveWorkbook.path & Sep
+    fileName = ActiveWorkbook.name
+    filePath = ActiveWorkbook.FullName
+    
+    Set VBComponents = ActiveWorkbook.VBProject.VBComponents
+    
+#End If
+
+    ProgramDir = Environ("APPDATA") & "\Microsoft\AddIns\Perfect_Lecture\"
+    
+    ChDir fileDir
+
+End Sub
+
+    
+Private Sub Common_Doc_Vars()
+
+#If PLATFORM = PowerPoint Then
+    Set sld = ActiveWindow.View.Slide
+    Set osld = ActiveWindow.Selection.SlideRange(1)
+            
+#ElseIf PLATFORM = Word Then
+    Set sld = ActiveDocument
+    Set osld = ActiveDocument
+            
+#ElseIf PLATFORM = Excel Then
+    Set sld = ActiveSheet
+    Set osld = ActiveSheet
+            
+#End If
+
+    Set AllShapes = sld.Shapes
+
+End Sub
+
 '==============================================================================================================================================
 '                                            Main Function
 '                              "Compile with Perfect Lecture" main function
@@ -58,28 +128,23 @@ Sub SaveAsMP4()
     '==============================================================================================================================================
     ' Step1: 存成要輸出 PPT
     '==============================================================================================================================================
+    
+    If ActivePresentation.path = "" Then ' therefore new unsaved document
+        MsgBox "Please save this document before compiling!"
+        Exit Sub
+    End If
 
-    With Application.ActivePresentation
+    With ActivePresentation
         .Save
     End With
 
     '==============================================================================================================================================
-    ' Step1: 存成要輸出 PPT
+    ' Step2: 設定路徑變數 & 備份原始檔
     '==============================================================================================================================================
     
+    Common_Path_Vars
+    
     Set fs = CreateObject("Scripting.FileSystemObject")
-    
-    Dim ProgramDir As String
-    ProgramDir = Environ("APPDATA") & "\Microsoft\AddIns\Perfect_Lecture\"
-    
-    Dim fileDir As String
-    fileDir = ActivePresentation.path & "\"
-    
-    Dim fileName As String
-    fileName = ActivePresentation.name
-    
-    Dim filePath As String
-    filePath = ActivePresentation.FullName
     
     Dim tmpSourceFileName As String
     tmpSourceFileName = filePath & ".source"
@@ -110,7 +175,7 @@ Sub SaveAsMP4()
     ' Clean up
     CleanUp TempDir, FilePrefix
     
-    ' CD to current file directory
+    ' Restore working directory
     ChDir fileDir
     
     
@@ -183,7 +248,7 @@ Sub SaveAsMP4()
     
     ExecScript Script
     
-    ' CD to current file directory
+    ' Restore working directory
     ChDir fileDir
     With Application.ActivePresentation
         .SaveAs OutputFilePath  'Save to an output file
@@ -207,6 +272,11 @@ Sub SaveAsMP4()
     Presentations.Open fileName:=filePath
     
     'Application.Presentations(OutputFileName).Close
+    
+    '==============================================================================================================================================
+    ' Step5: Restore working directory
+    '==============================================================================================================================================
+    ChDir fileDir
     
 #End If
     
@@ -346,23 +416,7 @@ Sub addPointer(pageIdx As Integer, PointerType As String, R As Single, G As Sing
 
     ActiveWindow.View.GotoSlide pageIdx
 
-
-#If PLATFORM = PowerPoint Then
-    Set sld = ActiveWindow.View.Slide
-    Set osld = ActiveWindow.Selection.SlideRange(1)
-    Set AllShapes = sld.Shapes
-            
-#ElseIf PLATFORM = Word Then
-    Set sld = ActiveDocument
-    Set osld = ActiveDocument
-    Set AllShapes = ActiveDocument.Shapes
-            
-#ElseIf PLATFORM = Excel Then
-    Set sld = ActiveSheet
-    Set osld = ActiveSheet
-    Set AllShapes = ActiveSheet.Shapes
-            
-#End If
+    Common_Doc_Vars
 
     Const PI = 3.14159265358979
 
@@ -432,24 +486,8 @@ End Sub
 
 Sub InsertAudio(pageIdx As Integer, Track As String)
     ActiveWindow.View.GotoSlide pageIdx
-
-
-#If PLATFORM = PowerPoint Then
-    Set sld = ActiveWindow.View.Slide
-    Set osld = ActiveWindow.Selection.SlideRange(1)
-    Set AllShapes = sld.Shapes
-            
-#ElseIf PLATFORM = Word Then
-    Set sld = ActiveDocument
-    Set osld = ActiveDocument
-    Set AllShapes = ActiveDocument.Shapes
-            
-#ElseIf PLATFORM = Excel Then
-    Set sld = ActiveSheet
-    Set osld = ActiveSheet
-    Set AllShapes = ActiveSheet.Shapes
-            
-#End If
+    
+    Common_Doc_Vars
 
     Dim oShp As Shape
     Dim oEffect As Effect

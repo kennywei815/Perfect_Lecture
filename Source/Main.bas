@@ -53,53 +53,119 @@ Const TeX4Office As Integer = 0
 Const ImportImage As Integer = 1
 
 
+Private VBComponents
+Private Sep As String
+    
+Private fileDir As String
+Private fileName As String
+Private fileFullName As String
+
+
+' Get current slide or document
+Public AllShapes As Shapes
+
+#If PLATFORM = PowerPoint Then
+    Public SlideIndex As Long
+    Public sld As Slide
+    Public osld As Slide
+            
+#ElseIf PLATFORM = Word Then
+    Public sld As Document
+    Public osld As Document
+            
+#ElseIf PLATFORM = Excel Then
+    Public sld As Worksheet
+    Public osld As Worksheet
+            
+#End If
+    
+
 
 '==============================================================================================================================================
-'                                            Main Functions
+'                                            Common_Vars Function
+'                                        Set up commonly used variables
+'==============================================================================================================================================
+Private Sub Common_Vars()
+    
+    'Sep = Application.PathSeparator
+    Sep = "\"
+
+#If PLATFORM = PowerPoint Then
+    fileDir = ActivePresentation.path & Sep
+    fileName = ActivePresentation.name
+    fileFullName = ActivePresentation.FullName
+    
+    Set VBComponents = ActivePresentation.VBProject.VBComponents
+            
+#ElseIf PLATFORM = Word Then
+    fileDir = ActiveDocument.path & Sep
+    fileName = ActiveDocument.name
+    fileFullName = ActiveDocument.FullName
+    
+    Set VBComponents = ActiveDocument.VBProject.VBComponents
+            
+#ElseIf PLATFORM = Excel Then
+    fileDir = ActiveWorkbook.path & Sep
+    fileName = ActiveWorkbook.name
+    fileFullName = ActiveWorkbook.FullName
+    
+    Set VBComponents = ActiveWorkbook.VBProject.VBComponents
+    
+#End If
+    
+    
+#If PLATFORM = PowerPoint Then
+    Set sld = ActiveWindow.View.Slide
+    Set osld = ActiveWindow.Selection.SlideRange(1)
+            
+#ElseIf PLATFORM = Word Then
+    Set sld = ActiveDocument
+    Set osld = ActiveDocument
+            
+#ElseIf PLATFORM = Excel Then
+    Set sld = ActiveSheet
+    Set osld = ActiveSheet
+            
+#End If
+
+    Set AllShapes = sld.Shapes
+    
+    ' Restore working directory
+    ChDir fileDir
+
+End Sub
+
+
+'==============================================================================================================================================
+'                                Wrappers for NewEditPicture Main Function
 '                       "New/Edit LaTeX Display" & "Insert/Change Image" main functions
-' Procedure:
-'   Step 1: Get information from old shape (if existed)
-'   Step 2: Run LaTeX Editor or other PNG generators
-'   Step 3: Get scaling factors from oldShape or according to current DPI and the font size
-'   Step 4: Insert PNG image and rescale it
-'   Step 5: Save code & other setting to newShape.AlternativeText, and set newShape.Name = FilePrefix
-'   Step 6: Copy animation settings, grouping information, and formatting from old image, then delete it
 '==============================================================================================================================================
 
 Public Sub EditLaTeX()
-
+    Common_Vars
+    
     NewEditPicture TeX4Office
+    
+    ' Restore working directory
+    ChDir fileDir
     
 End Sub
 
 
 Public Sub InsertPicture()
+    Common_Vars
 
     NewEditPicture ImportImage
+    
+    ' Restore working directory
+    ChDir fileDir
     
 End Sub
 
 
 Public Sub ReplaceLaTeX_Batch(shapeName As String, Find As String, Replacement As String)
     '[TODO]: write the content of TeXFile into this shape.AlternativeText
-    
-#If PLATFORM = PowerPoint Then
-    Set sld = ActiveWindow.View.Slide
-    Set osld = ActiveWindow.Selection.SlideRange(1)
-    'Set AllShapes = ActiveWindow.Selection.SlideRange.Shapes
-    Set AllShapes = sld.Shapes
-            
-#ElseIf PLATFORM = Word Then
-    Set sld = ActiveDocument
-    Set osld = ActiveDocument
-    Set AllShapes = ActiveDocument.Shapes
-            
-#ElseIf PLATFORM = Excel Then
-    Set sld = ActiveSheet
-    Set osld = ActiveSheet
-    Set AllShapes = ActiveSheet.Shapes
-            
-#End If
+    Common_Vars
 
 
     '==============================================================================================================================================
@@ -176,36 +242,24 @@ Public Sub ReplaceLaTeX_Batch(shapeName As String, Find As String, Replacement A
     code = Replace(code, Find, Replacement)
         
     Call AddTagsToShape(oldShape, code, shapeName)
-        
+    
+    ' Restore working directory
+    ChDir fileDir
     
     '==============================================================================================================================================
-    ' Step 3:
+    ' Step 3: Update the LaTeX display
     '==============================================================================================================================================
     NewEditPicture TeX4Office, True
+    
+    ' Restore working directory
+    ChDir fileDir
     
 End Sub
 
 
 Public Sub EditLaTeX_Batch(shapeName As String, TeXFilePath As String)
     '[TODO]: write the content of TeXFile into this shape.AlternativeText
-    
-#If PLATFORM = PowerPoint Then
-    Set sld = ActiveWindow.View.Slide
-    Set osld = ActiveWindow.Selection.SlideRange(1)
-    'Set AllShapes = ActiveWindow.Selection.SlideRange.Shapes
-    Set AllShapes = sld.Shapes
-            
-#ElseIf PLATFORM = Word Then
-    Set sld = ActiveDocument
-    Set osld = ActiveDocument
-    Set AllShapes = ActiveDocument.Shapes
-            
-#ElseIf PLATFORM = Excel Then
-    Set sld = ActiveSheet
-    Set osld = ActiveSheet
-    Set AllShapes = ActiveSheet.Shapes
-            
-#End If
+    Common_Vars
 
 
     '==============================================================================================================================================
@@ -280,40 +334,41 @@ Public Sub EditLaTeX_Batch(shapeName As String, TeXFilePath As String)
     ReadFromFile_UTF8 code, TeXFilePath
     
     Call AddTagsToShape(oldShape, code, shapeName)
-        
+    
+    ' Restore working directory
+    ChDir fileDir
     
     '==============================================================================================================================================
-    ' Step 3:
+    ' Step 3: Update the LaTeX display
     '==============================================================================================================================================
     NewEditPicture TeX4Office, True
+    
+    ' Restore working directory
+    ChDir fileDir
     
 End Sub
 
 
+'==============================================================================================================================================
+'                                   NewEditPicture Main Function
+'                       "New/Edit LaTeX Display" & "Insert/Change Image" main functions
+' Procedure:
+'   Step 1: Get information from old shape (if existed)
+'   Step 2: Run LaTeX Editor or other PNG generators
+'   Step 3: Get scaling factors from oldShape or according to current DPI and the font size
+'   Step 4: Insert PNG image and rescale it
+'   Step 5: Save code & other setting to newShape.AlternativeText, and set newShape.Name = FilePrefix
+'   Step 6: Copy animation settings, grouping information, and formatting from old image, then delete it
+'==============================================================================================================================================
 Public Sub NewEditPicture(PROGRAM As Integer, Optional BatchMode As Boolean = False)
     '[DONE]: implement Batch_Mode
+    Common_Vars
+
     
     '[TODO]: implement ßÔ¿…¶W
     '[TODO]: [Konwn Issue] In Excel, we don't know how to get OldGroup & OldGroup.GroupItems. Currently we can't restore group information of oldShape in Excel.
     
     
-    
-#If PLATFORM = PowerPoint Then
-    Set sld = ActiveWindow.View.Slide
-    Set osld = ActiveWindow.Selection.SlideRange(1)
-    Set AllShapes = ActiveWindow.Selection.SlideRange.Shapes
-            
-#ElseIf PLATFORM = Word Then
-    Set sld = ActiveDocument
-    Set osld = ActiveDocument
-    Set AllShapes = ActiveDocument.Shapes
-            
-#ElseIf PLATFORM = Excel Then
-    Set sld = ActiveSheet
-    Set osld = ActiveSheet
-    Set AllShapes = ActiveSheet.Shapes
-            
-#End If
         
     ' If we are in Edit mode, store parameters of old image
     Dim PosX As Single
@@ -623,5 +678,12 @@ End If
             oldShape.Delete
         End If
     End If
+    
+    
+    '==============================================================================================================================================
+    ' Step 7: Restore working directory
+    '==============================================================================================================================================
+    ChDir fileDir
+    
 End Sub
 
