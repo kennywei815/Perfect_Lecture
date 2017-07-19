@@ -4,7 +4,7 @@
 !define PRODUCT_NAME "Perfect Lecture"
 !define PRODUCT_VERSION "0.5"
 !define PRODUCT_PUBLISHER "Cheng-Kuan Wei"
-!define PRODUCT_WEB_SITE "https://github.com/kennywei815/PerfectLecture"
+!define PRODUCT_WEB_SITE "https://github.com/kennywei815/Perfect_Lecture"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\convert.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
 !define PRODUCT_UNINST_ROOT_KEY "HKLM"
