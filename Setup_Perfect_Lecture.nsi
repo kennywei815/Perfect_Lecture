@@ -24,7 +24,7 @@
 ; Instfiles page
 !insertmacro MUI_PAGE_INSTFILES
 ; Finish page
-!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\安裝手冊 - Perfect Lecture.docx"
+!define MUI_FINISHPAGE_SHOWREADME "$INSTDIR\Documents\安裝手冊 - Perfect Lecture.docx"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstaller pages
@@ -103,11 +103,17 @@ Section "MainSection" SEC01
   SetOutPath "$APPDATA\Microsoft\Word\startup"
   File "Install\AppData\Roaming\Microsoft\Word\startup\Perfect_Lecture.dotm"
   File "Install\AppData\Roaming\Microsoft\Word\startup\TeX4Office_Beta1.dotm"
-  SetOutPath "$INSTDIR"
-  File "Document\FAQ.txt"
-  File "Document\使用手冊 - Perfect Lecture.docx"
-  File "Document\安裝手冊 - Perfect Lecture.docx"
-  File "Document\開發者手冊 - Perfect Lecture.docx"
+  SetOutPath "$INSTDIR\Documents"
+  File "Documents\FAQ.txt"
+  File "Documents\使用手冊 - Perfect Lecture.docx"
+  File "Documents\安裝手冊 - Perfect Lecture.docx"
+  File "Documents\開發者手冊 - Perfect Lecture.docx"
+  SetOutPath "$INSTDIR\Demo"
+  File "Demo\Integration by Part (Chinese).pptx"
+  File "Demo\Integration by Part (English).pptx"
+  File "Demo\Integration by Part2 (English).pptx"
+  File "Demo\Syntax Overview4：3.pptx"
+  File "Demo\Syntax Overview16：9.pptx"
 SectionEnd
 
 Section -AdditionalIcons
@@ -115,9 +121,10 @@ Section -AdditionalIcons
   CreateDirectory "$SMPROGRAMS\Perfect Lecture"
   CreateShortCut "$SMPROGRAMS\Perfect Lecture\Website.lnk" "$INSTDIR\${PRODUCT_NAME}.url"
   CreateShortCut "$SMPROGRAMS\Perfect Lecture\Uninstall.lnk" "$INSTDIR\uninst.exe"
-  CreateShortCut "$SMPROGRAMS\Perfect Lecture\使用手冊.lnk" "$INSTDIR\使用手冊 - Perfect Lecture.docx"
-  CreateShortCut "$SMPROGRAMS\Perfect Lecture\安裝手冊.lnk" "$INSTDIR\安裝手冊 - Perfect Lecture.docx"
-  CreateShortCut "$SMPROGRAMS\Perfect Lecture\開發者手冊.lnk" "$INSTDIR\開發者手冊 - Perfect Lecture.docx"
+  CreateShortCut "$SMPROGRAMS\Perfect Lecture\使用手冊.lnk" "$INSTDIR\Documents\使用手冊 - Perfect Lecture.docx"
+  CreateShortCut "$SMPROGRAMS\Perfect Lecture\安裝手冊.lnk" "$INSTDIR\Documents\安裝手冊 - Perfect Lecture.docx"
+  CreateShortCut "$SMPROGRAMS\Perfect Lecture\開發者手冊.lnk" "$INSTDIR\Documents\開發者手冊 - Perfect Lecture.docx"
+  CreateShortCut "$SMPROGRAMS\Perfect Lecture\Demo.lnk" "$INSTDIR\Demo\"
 SectionEnd
 
 Section -Post
@@ -145,10 +152,15 @@ FunctionEnd
 Section Uninstall
   Delete "$INSTDIR\${PRODUCT_NAME}.url"
   Delete "$INSTDIR\uninst.exe"
-  Delete "$INSTDIR\開發者手冊 - Perfect Lecture.docx"
-  Delete "$INSTDIR\安裝手冊 - Perfect Lecture.docx"
-  Delete "$INSTDIR\使用手冊 - Perfect Lecture.docx"
-  Delete "$INSTDIR\FAQ.txt"
+  Delete "$INSTDIR\Documents\開發者手冊 - Perfect Lecture.docx"
+  Delete "$INSTDIR\Documents\安裝手冊 - Perfect Lecture.docx"
+  Delete "$INSTDIR\Documents\使用手冊 - Perfect Lecture.docx"
+  Delete "$INSTDIR\Documents\FAQ.txt"
+  Delete "$INSTDIR\Demo\Integration by Part (Chinese).pptx"
+  Delete "$INSTDIR\Demo\Integration by Part (English).pptx"
+  Delete "$INSTDIR\Demo\Integration by Part2 (English).pptx"
+  Delete "$INSTDIR\Demo\Syntax Overview4：3.pptx"
+  Delete "$INSTDIR\Demo\Syntax Overview16：9.pptx"
   Delete "$APPDATA\Microsoft\Word\startup\TeX4Office_Beta1.dotm"
   Delete "$APPDATA\Microsoft\Word\startup\Perfect_Lecture.dotm"
   Delete "$APPDATA\Microsoft\Excel\xlstart\TeX4Office_Beta1.xlam"
@@ -200,8 +212,11 @@ Section Uninstall
   Delete "$SMPROGRAMS\Perfect Lecture\使用手冊.lnk"
   Delete "$SMPROGRAMS\Perfect Lecture\安裝手冊.lnk"
   Delete "$SMPROGRAMS\Perfect Lecture\開發者手冊.lnk"
+  Delete "$SMPROGRAMS\Perfect Lecture\Demo.lnk"
 
   RMDir "$SMPROGRAMS\Perfect Lecture"
+  RMDir "$INSTDIR\Demo"
+  RMDir "$INSTDIR\Documents"
   RMDir "$INSTDIR"
   RMDir "$APPDATA\Microsoft\AddIns\TeX4Office_Editor\templates"
   RMDir "$APPDATA\Microsoft\AddIns\TeX4Office_Editor\ImageMagick-portable"
