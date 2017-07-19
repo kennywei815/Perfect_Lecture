@@ -22,16 +22,17 @@ You can find archived installers for these programs with installation manuals in
 ### Install
 Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/raw/master/Setup_Perfect_Lecture.exe) and install it on your machine!
 
-You can find the user manuals in the start menu.
-![alt text](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/start_menu.png)
+You can find the user manuals in the start menu. <br />
+
+![start_menu.png](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/start_menu.png =360x)
 
 ### Usage
 
 Just 1 step: Open the slides and type Perfect Lecture Scripts(enclosed by `<script>...</script>`) in the note page below. Then click "Compile with Perfect Lecture" in the "Add-ins" tab!
-![alt text](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/step1_compile_with_perfect_lecture.png)
+![step1_compile_with_perfect_lecture.png](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/step1_compile_with_perfect_lecture.png)
 
 The result slides and videos with machine-synthesized narrative will be put in the same directory.
-![alt text](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/step4_results.PNG)
+![step4_results.PNG](https://github.com/kennywei815/Perfect_Lecture/blob/master/www/step4_results.PNG)
 
 # License
 Copyright (c) 2017 魏誠寬(Cheng-Kuan Wei) and 汪治平教授(Prof. Jyhpyng Wang) Licensed under the Apache License.
