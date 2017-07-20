@@ -321,7 +321,11 @@ Sub SaveNotesToScript(scriptFile As String)
         txt = Replace(txt, "&lt;!--", "<!--")
         txt = Replace(txt, "--&gt;", "-->")
         
-        Script = Script & "<page index=""" & i & """>" & vbCrLf _
+        'Script = Script & "<page index=""" & i & """>" & vbCrLf _
+        '                & txt & vbCrLf _
+        '                & "</page>" & vbCrLf
+
+        Script = Script & "<page index=""" & i & """>" _
                         & txt & vbCrLf _
                         & "</page>" & vbCrLf
     Next
