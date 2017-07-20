@@ -7,8 +7,8 @@ import logging
 
 # Logging
 
-#logging.basicConfig(stream=sys.stderr, level=logging.INFO)  # RELEASE
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)  # DEBUG
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)  # RELEASE
+# logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)  # DEBUG
 
 
 
@@ -42,7 +42,7 @@ def writeNotePage(post_process_script_file, pageNum, script_text_arr, head_tail_
         print('addNewLineToNotePage,{},{}'.format(pageNum, quotedStr(line_arr[i])), file=post_process_script_file)
 
 # Program Setup
-print("genPostProecessVBA.py")
+print("Executing genPostProecessVBA.py...")
 
 workDir = os.path.dirname(os.path.realpath(__file__))
 codecDir = os.path.join(workDir, 'ImageMagick-portable')  #PATH
@@ -75,9 +75,12 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
     for page in root:
 
         logging.debug('%s %s %s %s', page.tag, page.attrib, page.text, page.tail) #DEBUG
-        pageNum = int(page.attrib['index']) + numPageAdded #DEBUG
+        pageNum_source = int(page.attrib['index'])
+        pageNum = pageNum_source + numPageAdded #DEBUG
         # for grand_child in page: #DEBUG
         #     logging.debug('%s %s %s %s', grand_child.tag, grand_child.attrib, grand_child.text, grand_child.tail) #DEBUG
+        print('--------------------------------------------------------------------------------------')
+        print('Processing page {}...'.format(pageNum_source))
         
         script_text_arr.clear()
         head_tail_arr.clear()
@@ -201,7 +204,12 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                     if len(cmd_opt) >= 2:
                         cmd = cmd_opt[0].lower()
                         opt = cmd_opt[1:]
-                        logging.debug('   (cmd, opt) = (%s, %s)', cmd, opt) #DEBUG                        
+                        logging.debug('   (cmd, opt) = (%s, %s)', cmd, opt) #DEBUG
+
+                        print('Command:  {}'.format(cmd), end='')
+                        for item in opt:
+                            print('\t"{}"'.format(item), end='')
+                        print('')
                         
                         # BEGIN DUPLICATE PAGES
 
@@ -257,8 +265,6 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                                 pointer_posY = opt[1]
                                 pointer_type = opt[2].lower()
                                 pointer_color = opt[3].lower()
-
-                                print(pointer_type)
                                 
                                 # [TODO]: Implement other colors
                                 if pointer_color == 'black':

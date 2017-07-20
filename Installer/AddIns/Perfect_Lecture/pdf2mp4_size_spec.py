@@ -7,8 +7,8 @@ import logging
 
 # Logging
 
-#logging.basicConfig(stream=sys.stderr, level=logging.INFO)  # RELEASE
-logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)  # DEBUG
+logging.basicConfig(stream=sys.stderr, level=logging.INFO)  # RELEASE
+# logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)  # DEBUG
 
 
 
@@ -21,7 +21,7 @@ def quotedStr(str_in):
     return '"' + str_in + '"'
 
 # Program Setup
-print("pdf2mp4.py")
+print("Executing pdf2mp4.py...")
 
 workDir = os.path.dirname(os.path.realpath(__file__))
 codecDir = os.path.join(workDir, 'ImageMagick-portable')  #PATH
@@ -63,19 +63,22 @@ post_process_script  = os.path.join(tmpDir, 'post_process.iscript')  #PATH
 with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_file:
     tree = et.ElementTree(file=script_file)
     root = tree.getroot()
-    for child in root:
+    for page in root:
 
-        logging.debug('%s %s %s %s', child.tag, child.attrib, child.text, child.tail) #DEBUG
-        # for grand_child in child:
+        logging.debug('%s %s %s %s', page.tag, page.attrib, page.text, page.tail) #DEBUG
+        # for grand_child in page:
         #     logging.debug('%s %s %s %s', grand_child.tag, grand_child.attrib, grand_child.text, grand_child.tail) #DEBUG
-        pageNum = int(child.attrib['index']) #DEBUG
+        pageNum_source = int(page.attrib['index'])
+        pageNum = pageNum_source
+        print('--------------------------------------------------------------------------------------')
+        print('Processing page {}...'.format(pageNum_source))
 
         pageAudio.append(None)
         frameRate.append(default_frameRate)
 
         #[DONE]: more than 1 script section?
         script_text = ''
-        for script in child.findall('script'):
+        for script in page.findall('script'):
             script_text += script.text
             logging.debug('%s %s %s %s', script.tag, script.attrib, script.text, script.tail) #DEBUG
 
@@ -201,6 +204,11 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                         opt = cmd_opt[1:]
                         logging.debug('   (cmd, opt) = (%s, %s)', cmd, opt) #DEBUG
 
+                        print('Command:  {}'.format(cmd), end='')
+                        for item in opt:
+                            print('\t{}'.format(item), end='')
+                        print('')
+
                         # [DONE]: implement 每一頁可以設定接下來(下一頁開始)的速度
                         if cmd == 'speed':
                             # use opt[0] only
@@ -226,7 +234,8 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                 # [DONE]: 應該改成根據 workDir (程式安裝路徑)
                 tts_exe = os.path.join(ttsDir, 'TTS_engine.exe')
                 
-                print('{} "{}" "{}"'.format(tts_exe, cur_tts_text, cur_audio))
+                # print('{} "{}" "{}"'.format(tts_exe, cur_tts_text, cur_audio))
+                print('Sythesizing narrative...')
                 os.system('{} "{}" "{}"'.format(tts_exe, cur_tts_text, cur_audio))  # RELEASE)
 
                 print('InsertAudio,{},{}'.format(pageNum, quotedStr(cur_audio)), file=post_process_script_file)
