@@ -25,8 +25,8 @@ print("pdf2mp4.py")
 
 workDir = os.path.dirname(os.path.realpath(__file__))
 codecDir = os.path.join(workDir, 'ImageMagick-portable')  #PATH
-ttsDir = os.path.join(workDir, 'TTS_engine')  #PATH
-tmpDir = 'C:\\Temp'                                         #PATH
+ttsDir = os.path.join(workDir, 'TTS_engine')              #PATH
+tmpDir = 'C:\\Temp'                                       #PATH
 
 if not os.path.exists(tmpDir):
     os.makedirs(tmpDir)
@@ -136,8 +136,7 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                     # logging.debug('   cmd_opt = \'%s\'', str(cmd_opt)) #DEBUG
 
                     # [TODO]: CHECK IT (BEGIN)
-                    # [DONE]: write customized tokenizer: deal with other white space characters (e.g. \t) enclosed by ""
-                    # [TODO]: deal with only the "" beside the separator
+                    # [DONE]: write customized tokenizer: deal with other white space characters (e.g. \t) enclosed by """..."""
                     logging.debug('   processed_line = \'%s\'', processed_line) #DEBUG
                     
                     cmd_opt = []
@@ -202,10 +201,10 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                         opt = cmd_opt[1:]
                         logging.debug('   (cmd, opt) = (%s, %s)', cmd, opt) #DEBUG
 
-                        # [TODO]: implement 每一頁可以設定接下來(下一頁開始)的速度
+                        # [DONE]: implement 每一頁可以設定接下來(下一頁開始)的速度
                         if cmd == 'speed':
                             # use opt[0] only
-                            # [TODO]: check opt[0] is a float and (float(opt[0]) / 60 >0 and < MAX_FRAME_RATE)
+                            # [DONE]: check opt[0] is a float and (float(opt[0]) / 60 >0 and < MAX_FRAME_RATE)
                             if not opt[0].isnumeric():
                                 logging.error('   [ERROR] The argument of "speed" command is not a number')
                                 pause_exit()
@@ -215,17 +214,16 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                             frameRate[-1] = float(opt[0]) / 60 # frames per minute  -->  frames per second
 
                         # [TODO]: implement 自動切換語言
-                        # [TODO]: implement 自動產生SSML
+                        # [DONE]: implement 自動產生SSML
                         elif cmd == 'say':
                             # use ' '.join(opt)
                             tts_text_file.write(' '.join(opt).strip('\'\"“”‘’`') + '\n')
                             needTTS = True
 
             # Run TTS
-            # [TODO]: use tts_text & tts_audio
+            # [DONE]: use tts_text & tts_audio
             if needTTS:
-                # [TODO]: 應該改成根據 workDir (程式安裝路徑)
-                # tts_exe = "Z:\\kenny\\Dropbox\\works\\perfect_lecturer\\Source\\TTS_engine\\TTS_engine\\bin\\Release\\TTS_engine.exe" #PATH
+                # [DONE]: 應該改成根據 workDir (程式安裝路徑)
                 tts_exe = os.path.join(ttsDir, 'TTS_engine.exe')
                 
                 print('{} "{}" "{}"'.format(tts_exe, cur_tts_text, cur_audio))
@@ -237,7 +235,7 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
 
 
 
-        # [TODO]: (with animation) make page number conform with JPGs
+        # [DONE]: (with animation) make page number conform with JPGs
         numPage += 1
 
 
