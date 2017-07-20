@@ -22,7 +22,7 @@ You can find archived installers for these programs with installation manuals in
 ### Install
 Just download [Setup_Perfect_Lecture.exe](https://github.com/kennywei815/Perfect_Lecture/raw/master/Setup_Perfect_Lecture.exe) and install it on your machine!
 
-After the installation completes, you can find the user manuals and the uninstaller in the start menu. <br />
+After the installation completes, you can find the user manuals, demo files and the uninstaller in the start menu. <br />
 
 <img src="https://github.com/kennywei815/Perfect_Lecture/blob/master/www/start_menu.png" width="360">
 
