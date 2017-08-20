@@ -239,6 +239,21 @@ Public Sub ReplaceLaTeX_Batch(shapeName As String, Find As String, Replacement A
     '==============================================================================================================================================
     code = oldShape.AlternativeText
     
+    'TODO_NOW: 處理find = \sublabel{...} 時，要先找\sublabel{...}{...}整段，再replace  成 \sublabel{...}{新的}
+    If Left(Find, 9) = "\sublabel" Then
+        
+        '   先找 \sublabel{...}{ 的位置，再找下一個 } 把整段子字串當新的find，\sublabel{...}{原Replacement} 當成新 Replacement
+        start = InStr(code, Find & "{")
+        If start <> 0 Then
+            endPos = InStr(start + Len(Find), code, "}")
+        End If
+        
+        If endPos <> 0 Then
+            Find = Mid(code, start, endPos - start + 1)
+        End If
+    
+    End If
+    
     code = Replace(code, Find, Replacement)
         
     Call AddTagsToShape(oldShape, code, shapeName)

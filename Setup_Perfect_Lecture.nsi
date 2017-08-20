@@ -2,7 +2,7 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "Perfect Lecture"
-!define PRODUCT_VERSION "1.0 RC3"
+!define PRODUCT_VERSION "1.1 RC1"
 !define PRODUCT_PUBLISHER "Cheng-Kuan Wei"
 !define PRODUCT_WEB_SITE "https://github.com/kennywei815/Perfect_Lecture"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\convert.exe"
@@ -66,7 +66,7 @@ Section "MainSection" SEC01
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\ImageMagick-portable\type-ghostscript.xml"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\ImageMagick-portable\type.xml"
   SetOutPath "$APPDATA\Microsoft\AddIns\Perfect_Lecture"
-  File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4.py"
+  ;File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4.py"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4_size_spec.py"
   SetOutPath "$APPDATA\Microsoft\AddIns\Perfect_Lecture\TTS_engine"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\TTS_engine\TTS_engine.exe"
