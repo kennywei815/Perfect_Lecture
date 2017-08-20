@@ -86,7 +86,11 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
         script_text_arr.clear()
         head_tail_arr.clear()
 
-        head_tail_arr.append(page.text)  # lines before first <script>
+        if page.text:
+            head_tail_arr.append(page.text)  # lines before first <script>
+        else:
+            head_tail_arr.append('')  # lines before first <script>
+
         lines_in_current_section = ''
 
         #[DONE]: more than 1 script section
