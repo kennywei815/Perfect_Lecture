@@ -66,7 +66,7 @@ Section "MainSection" SEC01
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\ImageMagick-portable\type-ghostscript.xml"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\ImageMagick-portable\type.xml"
   SetOutPath "$APPDATA\Microsoft\AddIns\Perfect_Lecture"
-  File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4.py"
+  ;File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4.py"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\pdf2mp4_size_spec.py"
   SetOutPath "$APPDATA\Microsoft\AddIns\Perfect_Lecture\TTS_engine"
   File "Install\AppData\Roaming\Microsoft\AddIns\Perfect_Lecture\TTS_engine\TTS_engine.exe"

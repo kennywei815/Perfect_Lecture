@@ -1,5 +1,6 @@
 import sys
 import os
+import re
 import shutil
 import time
 import xml.etree.ElementTree as et
@@ -252,6 +253,13 @@ with open(post_process_script, 'w', encoding = 'UTF-8') as post_process_script_f
                                     pause_exit()
                                 find = opt[2]
                                 replacement = opt[3]
+
+                                # [TODO_NOW]: find: \sublabel{}{} 取代成 \sublabel{}
+                                match = re.search(r'\\sublabel\{(?P<sublabel>.*?)\}', find)
+                                if match:
+                                    sublabel = match.group('sublabel')
+                                    find = match.group(0)
+                                    replacement = find + '{' + replacement + '}'
 
                                 # Step1: 切換到對應頁 
                                 # Step2: replace obj, find, replacement # 不需要用str.encode() & str.decode()處理編碼，可以直接貼上
